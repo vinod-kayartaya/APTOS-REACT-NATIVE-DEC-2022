@@ -11,6 +11,8 @@ import ItemList from './src/components/ItemList';
 
 // npm i expo-font
 import { useFonts } from 'expo-font';
+import ItemForm from './src/components/ItemForm';
+import COLORS from './src/constants/COLORS';
 
 const initialDummyData = [
     { id: 1, text: 'Table salt', quantity: '2 kg', inCart: true },
@@ -29,6 +31,13 @@ export default function App() {
 
     if (!fontsLoaded) {
         return null;
+    }
+
+    // just for the sake of demo, we are using regular function instead of arrow function
+    function addItem(item) {
+        item.id =
+            items.length === 0 ? 1 : Math.max(...items.map((i) => i.id)) + 1;
+        setItems((oldItems) => [...oldItems, item]);
     }
 
     // define as an arrow function
@@ -51,12 +60,15 @@ export default function App() {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar translucent />
-            <View style={{ paddingHorizontal: 10 }}>
-                <ItemList
-                    items={items}
-                    deleteItem={deleteItem}
-                    toggleInCart={toggleInCart}
-                />
+            <View style={{ flex: 1, paddingHorizontal: 10 }}>
+                <View style={{ flex: 1 }}>
+                    <ItemList
+                        items={items}
+                        deleteItem={deleteItem}
+                        toggleInCart={toggleInCart}
+                    />
+                </View>
+                <ItemForm addItem={addItem.bind(this)} />
             </View>
         </SafeAreaView>
     );
@@ -66,5 +78,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: Platform.OS === 'android' ? sb.currentHeight : 0,
+        backgroundColor: COLORS.lightgrey,
     },
 });
