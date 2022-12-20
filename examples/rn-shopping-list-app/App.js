@@ -6,6 +6,7 @@ import {
     StatusBar as sb,
     Platform,
     View,
+    Text,
 } from 'react-native';
 import ItemList from './src/components/ItemList';
 
@@ -23,6 +24,8 @@ const initialDummyData = [
 
 export default function App() {
     const [items, setItems] = useState(initialDummyData);
+    const [itemForEdit, setItemForEdit] = useState({});
+
     // load the fonts, and until then don't display any content
     const [fontsLoaded] = useFonts({
         Comfortaa: require('./assets/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf'),
@@ -57,6 +60,13 @@ export default function App() {
         setItems(itemsCopy);
     };
 
+    const updateItem = (item) => {
+        const itemsCopy = [...items];
+        const index = itemsCopy.findIndex((i) => i.id === item.id);
+        if (index === -1) return;
+        itemsCopy[index] = item;
+        setItems(itemsCopy);
+    };
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar translucent />
@@ -66,9 +76,14 @@ export default function App() {
                         items={items}
                         deleteItem={deleteItem}
                         toggleInCart={toggleInCart}
+                        setItemForEdit={setItemForEdit}
                     />
                 </View>
-                <ItemForm addItem={addItem.bind(this)} />
+                <ItemForm
+                    itemForEdit={itemForEdit}
+                    addItem={addItem.bind(this)} // .bind(this) is required only for regular function
+                    updateItem={updateItem}
+                />
             </View>
         </SafeAreaView>
     );

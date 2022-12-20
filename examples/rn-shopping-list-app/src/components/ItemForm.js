@@ -1,15 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import COLORS from '../constants/COLORS';
 import Button from './Button';
 
-const ItemForm = ({ addItem }) => {
+const ItemForm = ({ addItem, itemForEdit, updateItem }) => {
     const [item, setItem] = useState({});
+
+    useEffect(() => {
+        //job to be done, when deps change
+        setItem({ ...itemForEdit });
+    }, [
+        // deps
+        itemForEdit,
+    ]);
 
     const buttonHandler = () => {
         if (!item.text) return;
 
-        addItem(item);
+        if (item.id) {
+            // update
+            updateItem(item);
+        } else {
+            // add
+            addItem(item);
+        }
+
         setItem({});
     };
 

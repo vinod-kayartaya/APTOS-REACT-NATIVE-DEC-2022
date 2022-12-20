@@ -4,7 +4,7 @@ import COLORS from '../constants/COLORS';
 
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
 
-const Item = ({ item, deleteItem, toggleInCart }) => {
+const Item = ({ item, deleteItem, toggleInCart, setItemForEdit }) => {
     return (
         <View
             style={[
@@ -23,7 +23,12 @@ const Item = ({ item, deleteItem, toggleInCart }) => {
                         color={item.inCart ? COLORS.green : COLORS.blue}
                     />
                 </TouchableOpacity>
-                <Text style={[styles.text]}>{item.text}</Text>
+                <Text
+                    onPress={() => setItemForEdit(item)}
+                    style={[styles.text]}
+                >
+                    {item.text}
+                </Text>
             </View>
 
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>

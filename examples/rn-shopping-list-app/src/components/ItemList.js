@@ -2,13 +2,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import COLORS from '../constants/COLORS';
 import Item from './Item';
 
-const ItemList = ({ items, deleteItem, toggleInCart }) => {
+const ItemList = ({ items, deleteItem, toggleInCart, setItemForEdit }) => {
     const itemsJsx = items.map((item) => (
         <Item
             key={item.id}
             item={item}
             deleteItem={deleteItem}
             toggleInCart={toggleInCart}
+            setItemForEdit={setItemForEdit}
         />
     ));
 
