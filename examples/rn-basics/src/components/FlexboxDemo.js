@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 
 const FlexboxDemo = () => {
@@ -34,7 +34,7 @@ const FlexboxDemo = () => {
             >
                 <View style={[styles.box, { backgroundColor: 'red' }]} />
                 <View style={[styles.box, { backgroundColor: 'green' }]} />
-                <View style={[styles.box, { backgroundColor: 'blue' }]} />
+                <View style={[styles.box, { backgroundColor: '#5757bf' }]} />
             </View>
         </View>
     );

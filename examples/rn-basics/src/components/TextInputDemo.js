@@ -40,9 +40,10 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 1,
-        fontSize: 20,
-        borderColor: '#ccc',
+        fontSize: 16,
+        borderColor: '#aba4a4',
         borderWidth: 1,
         padding: 10,
+        marginRight: 20,
     },
 });
