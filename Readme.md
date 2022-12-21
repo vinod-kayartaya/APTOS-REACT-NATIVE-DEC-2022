@@ -29,3 +29,14 @@ Each of the core react native components will be compiled into device's native c
 1. Image --> ImageView (android), UIImageView (ios), &lt;img src=...> (web)
 
 JS inside your components will be shipped and interpreted using a JS engine.
+
+### To work with React Navigation App
+
+-   create a new react native project using expo
+    -   npx create-expo-app --template
+-   cd into your project folder
+    -   cd rn-movie-browser
+-   install the following dependencies
+    -   npm install @react-navigation/native
+    -   npx expo install react-native-screens react-native-safe-area-context
+    -   npm install @react-navigation/native-stack
