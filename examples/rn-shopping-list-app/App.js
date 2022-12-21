@@ -6,7 +6,7 @@ import {
     StatusBar as sb,
     Platform,
     View,
-    Text,
+    ScrollView,
 } from 'react-native';
 import ItemList from './src/components/ItemList';
 
@@ -71,14 +71,14 @@ export default function App() {
         <SafeAreaView style={styles.container}>
             <StatusBar translucent />
             <View style={{ flex: 1, paddingHorizontal: 10 }}>
-                <View style={{ flex: 1 }}>
+                <ScrollView style={{ flex: 1 }}>
                     <ItemList
                         items={items}
                         deleteItem={deleteItem}
                         toggleInCart={toggleInCart}
                         setItemForEdit={setItemForEdit}
                     />
-                </View>
+                </ScrollView>
                 <ItemForm
                     itemForEdit={itemForEdit}
                     addItem={addItem.bind(this)} // .bind(this) is required only for regular function
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: Platform.OS === 'android' ? sb.currentHeight : 0,
+        paddingBottom: Platform.OS === 'android' ? 20 : 0,
         backgroundColor: COLORS.lightgrey,
     },
 });

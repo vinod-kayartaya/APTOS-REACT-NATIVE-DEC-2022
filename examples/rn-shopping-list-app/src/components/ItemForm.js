@@ -51,8 +51,8 @@ const ItemForm = ({ addItem, itemForEdit, updateItem }) => {
 
             <View style={styles.buttonsContainer}>
                 <Button
-                    icon='check'
-                    title='Add'
+                    icon={item.id ? 'save' : 'check'}
+                    title={item.id ? 'Update' : 'Add'}
                     bgcolor='powderblue'
                     color='navy'
                     onPress={buttonHandler}

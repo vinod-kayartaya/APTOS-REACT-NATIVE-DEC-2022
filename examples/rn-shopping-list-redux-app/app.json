@@ -1,0 +1,31 @@
+{
+    "expo": {
+        "name": "Shopping List",
+        "slug": "rn-shopping-list-redux",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/grocery.jpeg",
+        "userInterfaceStyle": "light",
+        "splash": {
+            "image": "./assets/grocery.jpeg",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/adaptive-icon.png",
+                "backgroundColor": "#FFFFFF"
+            }
+        },
+        "web": {
+            "favicon": "./assets/favicon.png"
+        }
+    }
+}

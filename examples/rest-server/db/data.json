@@ -1,0 +1,10 @@
+{
+    "items": [
+        { "id": 1, "text": "Table salt", "quantity": "2 kg", "inCart": true },
+        { "id": 2, "text": "Safola gold oil", "quantity": "5 ltr" },
+        { "id": 3, "text": "Paper clips", "inCart": false },
+        { "id": 4, "text": "Cat food", "quantity": "1 kg", "inCart": true },
+        { "id": 5, "text": "Raw Rice", "quantity": "10 kg" },
+        { "id": 6, "text": "Ashirvad Wheet", "quantity": "5 kg" }
+    ]
+}
