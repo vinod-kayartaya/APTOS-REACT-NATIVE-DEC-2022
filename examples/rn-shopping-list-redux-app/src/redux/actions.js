@@ -21,24 +21,29 @@ export const loadItems = async () => {
     return { type: LOAD_ITEMS, payload: resp.data };
 };
 
-export const deleteItem = (id) => {
+export const deleteItem = async (id) => {
+    await axios.delete(baseUrl + id);
     return { type: DELETE_ITEM, payload: id };
 };
 
-export const toggleItemInCart = (id) => {
-    return { type: TOGGLE_ITEM_IN_CART, payload: id };
+export const toggleItemInCart = async (item) => {
+    item.inCart = !item.inCart;
+    const res = await axios.put(baseUrl + item.id, item);
+    return { type: TOGGLE_ITEM_IN_CART, payload: res.data };
 };
 
-export const addItem = (item) => {
-    return { type: ADD_ITEM, payload: item };
+export const addItem = async (item) => {
+    const res = await axios.post(baseUrl, item);
+    return { type: ADD_ITEM, payload: res.data };
 };
 
 export const editItem = (item) => {
     return { type: EDIT_ITEM, payload: item };
 };
 
-export const updateItem = (item) => {
-    return { type: UPDATE_ITEM, payload: item };
+export const updateItem = async (item) => {
+    const res = await axios.put(baseUrl + item.id, item);
+    return { type: UPDATE_ITEM, payload: res.data };
 };
 
 export const cancelEdit = () => {

@@ -23,10 +23,13 @@ const ItemForm = () => {
 
         if (item.id) {
             // update
-            dispatch(updateItem(item));
+            updateItem(item).then(dispatch);
         } else {
             // add
-            dispatch(addItem(item));
+            // IIFE
+            // (async () => dispatch(await addItem(item)))();
+            // addItem(item).then((action) => dispatch(action));
+            addItem(item).then(dispatch);
         }
 
         setItem({});

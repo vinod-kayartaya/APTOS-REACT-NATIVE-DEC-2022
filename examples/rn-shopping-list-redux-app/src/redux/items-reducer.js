@@ -30,8 +30,8 @@ function itemsReducer(state = initialState, action) {
 
     if (action.type === TOGGLE_ITEM_IN_CART) {
         let { items } = { ...state };
-        let itemToModify = items.find((i) => i.id === action.payload);
-        itemToModify.inCart = !itemToModify.inCart;
+        let index = items.findIndex((i) => i.id === action.payload.id);
+        items[index] = action.payload;
         return { ...state, items };
     }
 
@@ -45,8 +45,6 @@ function itemsReducer(state = initialState, action) {
 
     if (action.type === ADD_ITEM) {
         let { items } = { ...state };
-        action.payload.id =
-            items.length === 0 ? 1 : Math.max(...items.map((i) => i.id)) + 1;
         items.push(action.payload);
         return { ...state, items };
     }

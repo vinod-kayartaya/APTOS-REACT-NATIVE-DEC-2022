@@ -19,7 +19,7 @@ const Item = ({ item }) => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <TouchableOpacity
                     style={{ marginRight: 10 }}
-                    onPress={() => dispatch(toggleItemInCart(item.id))}
+                    onPress={() => toggleItemInCart(item).then(dispatch)}
                 >
                     <AntDesign
                         name={item.inCart ? 'checkcircleo' : 'pluscircleo'}
@@ -39,7 +39,7 @@ const Item = ({ item }) => {
                 <Text style={[styles.text]}>{item.quantity}</Text>
                 <TouchableOpacity
                     style={{ marginLeft: 10 }}
-                    onPress={() => dispatch(deleteItem(item.id))}
+                    onPress={() => deleteItem(item.id).then(dispatch)}
                 >
                     <FontAwesome name='trash' size={20} color={COLORS.red} />
                 </TouchableOpacity>

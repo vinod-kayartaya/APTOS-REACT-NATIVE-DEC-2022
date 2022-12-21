@@ -12,6 +12,7 @@ const ItemList = () => {
     const itemsJsx = items.map((item) => <Item key={item.id} item={item} />);
 
     useEffect(() => {
+        // loadItems().then((action) => dispatch(action));
         loadItems().then(dispatch);
     }, []); // empty array for dependency list --> useEffect callback is executed only once during the rendering of the component.
 
