@@ -1,13 +1,8 @@
-import {
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
+import MovieList from '../components/MovieList';
 
 const baseUrl = 'https://www.omdbapi.com/?apikey=aa9e49f&s=';
 
@@ -18,7 +13,7 @@ const MovieListScreen = () => {
     const submitHandler = async () => {
         const resp = await fetch(baseUrl + searchText);
         const data = await resp.json();
-        setMovies(data.Search);
+        setMovies([...data['Search']]);
     };
 
     return (
@@ -36,8 +31,8 @@ const MovieListScreen = () => {
                     <AntDesign name='search1' size={30} color='#777' />
                 </TouchableOpacity>
             </View>
-            <View style={[{ flex: 1 }]}>
-                <Text>{JSON.stringify(movies)}</Text>
+            <View style={[{ flex: 1, width: '100%' }]}>
+                <MovieList movies={movies} />
             </View>
         </View>
     );
@@ -49,7 +44,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-end',
     },
     inputContainer: {
         width: '100%',

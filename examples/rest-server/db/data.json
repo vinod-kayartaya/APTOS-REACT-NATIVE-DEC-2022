@@ -1,16 +1,3 @@
 {
-  "items": [
-    {
-      "text": "Wheat powder",
-      "quantity": "5 kg",
-      "id": 8,
-      "inCart": true
-    },
-    {
-      "text": "Sugar",
-      "quantity": "3 kg",
-      "id": 9,
-      "inCart": true
-    }
-  ]
+  "items": []
 }
