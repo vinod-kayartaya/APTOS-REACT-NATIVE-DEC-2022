@@ -10,6 +10,7 @@ import {
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Loading from '../components/Loading';
 
 const baseUrl = 'https://www.omdbapi.com/?apikey=aa9e49f&i=';
 
@@ -25,7 +26,7 @@ const MovieDetails = ({ movie, navigation }) => (
                     marginRight: 10,
                 }}
             />
-            <View>
+            <View style={{ flex: 1 }}>
                 <Text style={{ fontSize: 25, fontWeight: 'bold' }}>
                     {movie.Title}
                 </Text>
@@ -48,6 +49,11 @@ const MovieDetails = ({ movie, navigation }) => (
         </View>
         <ScrollView style={{ flex: 1, marginTop: 20 }}>
             <Text style={{ fontSize: 20 }}>{movie.Plot}</Text>
+
+            <Text style={styles.misc}>Actors: {movie.Actors}</Text>
+            <Text style={styles.misc}>Director: {movie.Director}</Text>
+            <Text style={styles.misc}>Language: {movie.Language}</Text>
+            <Text style={styles.misc}>Country: {movie.Country}</Text>
         </ScrollView>
         <View
             style={{
@@ -89,7 +95,8 @@ const MovieDetailsScreen = ({ route, navigation }) => {
             {movie ? (
                 <MovieDetails navigation={navigation} movie={movie} />
             ) : (
-                <ActivityIndicator size='large' />
+                // <ActivityIndicator size='large' />
+                <Loading />
             )}
         </View>
     );
@@ -103,5 +110,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: 80,
+    },
+    misc: {
+        fontSize: 15,
+        paddingVertical: 10,
+        color: '#888',
     },
 });
