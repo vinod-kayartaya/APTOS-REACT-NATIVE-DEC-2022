@@ -9,11 +9,21 @@ const baseUrl = 'https://www.omdbapi.com/?apikey=aa9e49f&s=';
 const MovieListScreen = () => {
     const [searchText, setSearchText] = useState('');
     const [movies, setMovies] = useState([]);
+    const [page, setPage] = useState(1);
+
+    const loadMovies = async () => {
+        console.log('page is', page);
+        const resp = await fetch(baseUrl + searchText + '&page=' + page);
+        const data = await resp.json();
+        setMovies((prevMovies) => [...prevMovies, ...data['Search']]);
+        setPage(page + 1);
+    };
 
     const submitHandler = async () => {
-        const resp = await fetch(baseUrl + searchText);
+        const resp = await fetch(baseUrl + searchText + '&page=1');
         const data = await resp.json();
-        setMovies([...data['Search']]);
+        setMovies(data['Search']);
+        setPage(2);
     };
 
     return (
@@ -32,7 +42,7 @@ const MovieListScreen = () => {
                 </TouchableOpacity>
             </View>
             <View style={[{ flex: 1, width: '100%' }]}>
-                <MovieList movies={movies} />
+                <MovieList loadMovies={loadMovies} movies={movies} />
             </View>
         </View>
     );

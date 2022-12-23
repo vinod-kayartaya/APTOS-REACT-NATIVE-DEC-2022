@@ -5,6 +5,9 @@ import KycScreen from './KycScreen';
 import AboutScreen from './About';
 import LoginRegisterScreen from './LoginRegisterScreen';
 import { AntDesign } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { LOGOUT } from '../redux/action-types';
+import { auth } from '../../firebase';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,14 +36,10 @@ const stackOptions = [
         name: 'About',
         component: AboutScreen,
     },
-    {
-        icon: 'door',
-        title: 'Login or Register',
-        name: 'LoginRegister',
-        component: LoginRegisterScreen,
-    },
 ];
 function HomeScreen({ navigation }) {
+    const { user, isLoggedIn } = useSelector((store) => store.userState);
+    const dispatch = useDispatch();
     return (
         <View style={{ padding: 50 }}>
             <Text style={{ fontSize: 30 }}>Settings</Text>
@@ -66,6 +65,52 @@ function HomeScreen({ navigation }) {
                         </View>
                     )}
                 />
+
+                {!isLoggedIn && (
+                    <View style={{ padding: 10, flexDirection: 'row' }}>
+                        <AntDesign
+                            name='login'
+                            size={20}
+                            style={{ marginRight: 15 }}
+                        />
+                        <Pressable
+                            onPress={() =>
+                                navigation.navigate('LoginOrRegister')
+                            }
+                        >
+                            <Text style={{ fontSize: 20 }}>
+                                Login or register
+                            </Text>
+                        </Pressable>
+                    </View>
+                )}
+
+                {isLoggedIn && (
+                    <View style={{ padding: 10, flexDirection: 'row' }}>
+                        <AntDesign
+                            name='logout'
+                            size={20}
+                            style={{ marginRight: 15 }}
+                        />
+                        <Pressable
+                            onPress={() => {
+                                auth.signOut()
+                                    .then(() => dispatch({ type: LOGOUT }))
+                                    .catch((err) => alert(err.message));
+                            }}
+                        >
+                            <Text style={{ fontSize: 20 }}>Logout</Text>
+                            <Text
+                                style={{
+                                    fontSize: 15,
+                                    color: '#777',
+                                }}
+                            >
+                                (logged in as {user.email})
+                            </Text>
+                        </Pressable>
+                    </View>
+                )}
             </View>
         </View>
     );
@@ -75,11 +120,17 @@ const SettingsScreen = () => {
         <Stack.Navigator>
             {stackOptions.map((option) => (
                 <Stack.Screen
+                    key={option.name}
                     options={{ headerTitle: option.title }}
                     name={option.name}
                     component={option.component}
                 />
             ))}
+            <Stack.Screen
+                options={{ headerTitle: 'Login or register' }}
+                name='LoginOrRegister'
+                component={LoginRegisterScreen}
+            />
         </Stack.Navigator>
     );
 };

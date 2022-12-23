@@ -1,15 +1,22 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import MovieCard from './MovieCard';
 
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, loadMovies }) => {
+    const flRef = useRef();
+
+    useEffect(() => {
+        if (flRef) {
+            flRef.current.scrollToOffset(0);
+        }
+    }, [movies]);
+
     return (
         <View style={styles.container}>
             <FlatList
+                ref={flRef}
                 onEndReachedThreshold={0.01}
-                onEndReached={(info) => {
-                    console.log('End reached with info: ', info);
-                }}
+                onEndReached={loadMovies}
                 data={movies}
                 keyExtractor={(item) => item.imdbID}
                 renderItem={({ item }) => <MovieCard movie={item} />}
